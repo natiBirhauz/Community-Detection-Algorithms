@@ -1,4 +1,4 @@
-fr_algorithm.py shows the geraph using Fruchterman-Reingold force-directed algorithm.
+fr_algorithm.py shows the graph using Fruchterman-Reingold force-directed algorithm.
 
 --------------------------------------------------------------------------------
 
