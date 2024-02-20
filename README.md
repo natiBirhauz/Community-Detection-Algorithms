@@ -1,7 +1,4 @@
-![Image description](https://images.theconversation.com/files/225699/original/file-20180702-116143-1ic135n.jpg?ixlib=rb-1.1.0&q=45&auto=format&w=1200&h=1200.0&fit=crop)
-
-Detecting Communities in Weighted Graphs
-========================================
+FOR THE GN ALGORITHM
 
 ## Input
  
@@ -17,45 +14,7 @@ simply set the weight equal to one on each input line.
 
 This code runs Girvan-Newman algorithm and returns a list of detected communities with maximum modularity.
 
-## Dependencies
-
-For running the python code, you need to install Python 3 and NetworkX package on your machine. Check link below for more details:
-
-	https://networkx.github.io/documentation/latest/install.html
-
-## Girvan-Newman Algorithm Description
-
-You can find the details for how Girvan-Newman algorithm works from the following link: 
-
-	http://www.kazemjahanbakhsh.com/codes/cmty.html
 
 ## How to run Python script
 
 	python cmty.py graph.txt
-
-If you have any question about the code or you want to report a bug, please contact me @ <b>k DOT jahanbakhsh AT gmail DOT com</b>.
-
-## Licence
-
-    Copyright (c) 2013 Black Square Media Ltd. All rights reserved.
-    (The MIT License)
-
-    Permission is hereby granted, free of charge, to any person obtaining
-    a copy of this software and associated documentation files (the
-    'Software'), to deal in the Software without restriction, including
-    without limitation the rights to use, copy, modify, merge, publish,
-    distribute, sublicense, and/or sell copies of the Software, and to
-    permit persons to whom the Software is furnished to do so, subject to
-    the following conditions:
-
-    The above copyright notice and this permission notice shall be
-    included in all copies or substantial portions of the Software.
-
-    THE SOFTWARE IS PROVIDED 'AS IS', WITHOUT WARRANTY OF ANY KIND,
-    EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
-    MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT.
-    IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY
-    CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT,
-    TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE
-    SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
-
