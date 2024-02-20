@@ -1,4 +1,9 @@
-FOR THE GN ALGORITHM
+fr_algorithm.py shows the geraph using Fruchterman-Reingold force-directed algorithm.
+
+--------------------------------------------------------------------------------
+
+for the  Girvan-Newman algorithm run on consule : 	python cmty.py graph.txt
+
 
 ## Input
  
@@ -13,8 +18,3 @@ simply set the weight equal to one on each input line.
 ## Output
 
 This code runs Girvan-Newman algorithm and returns a list of detected communities with maximum modularity.
-
-
-## How to run Python script
-
-	python cmty.py graph.txt
