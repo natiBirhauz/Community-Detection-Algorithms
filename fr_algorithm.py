@@ -1,4 +1,4 @@
-import networkx as nx
+import networkx as nx 
 import matplotlib.pyplot as plt
 #Position nodes using Fruchterman-Reingold force-directed algorithm.
 # Read connections from a text file
