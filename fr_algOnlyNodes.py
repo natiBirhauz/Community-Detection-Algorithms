@@ -36,16 +36,27 @@ for i, community in enumerate(communities):
     for node in community:
         color_map[node] = color
 
-# Draw the graph
-pos = nx.spring_layout(G)  # Positions for all nodes
-edge_labels = {(source, destination): weight['weight'] for source, destination, weight in G.edges(data=True)}
-nx.draw(G, pos, with_labels=True, node_size=200, node_color=[color_map.get(node, "blue") for node in G.nodes()], font_size=7, width=0.3)
+# Generate layout positions for the original graph
+pos = nx.spring_layout(G)
+
+# Filter edges to include only those within the same community
+subgraph = nx.DiGraph()
+for community in communities:
+    for node1 in community:
+        for node2 in community:
+            if G.has_edge(node1, node2):
+                subgraph.add_edge(node1, node2, weight=G[node1][node2]['weight'])
+
+# Ensure all nodes in the communities are included in the subgraph
+for community in communities:
+    subgraph.add_nodes_from(community)
+
+# Draw the subgraph with the original layout positions
+nx.draw(subgraph, pos, with_labels=True, node_size=200, node_color=[color_map.get(node, "blue") for node in subgraph.nodes()], font_size=7, width=0.3)
 
 # Create legend
 legend_patches = [mpatches.Patch(color=community_colors[i], label=community_labels[i]) for i in range(len(communities))]
 plt.legend(handles=legend_patches, loc='upper left', fontsize='x-small', title="Communities")
-
-
 
 plt.title("Connection Web Visualization")
 plt.show()
