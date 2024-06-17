@@ -3,7 +3,7 @@ import matplotlib.pyplot as plt
 import matplotlib.patches as mpatches
 import random
 import mplcursors
-
+# Fruchterman-Reingold algorithm
 # Read connections from a text file
 connections = []
 with open("graph.txt", "r") as file:

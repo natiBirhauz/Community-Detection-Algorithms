@@ -7,7 +7,7 @@ from cdlib import algorithms
 
 # Read connections from a text file
 connections = []
-with open("social_network100.txt", "r") as file:
+with open("sorted_network_by_source.txt", "r") as file:
     for line in file:
         source, destination, weight = map(int, line.strip().split(","))
         connections.append((source, destination, weight))

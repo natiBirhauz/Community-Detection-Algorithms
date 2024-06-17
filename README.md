@@ -2,8 +2,8 @@ fr_algorithm.py shows the graph using Fruchterman-Reingold force-directed algori
 
 --------------------------------------------------------------------------------
 
-for the  Girvan-Newman algorithm run on consule : 	python cmty.py graph.txt
-python cmty.py social_network100.txt
+for the  Girvan-Newman algorithm run on consule : 	python GN_ALG.py graph.txt
+python GN_ALG.py social_network100.txt
 
 ## Input
  

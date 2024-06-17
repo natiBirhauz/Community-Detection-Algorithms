@@ -2,7 +2,7 @@ import networkx as nx
 import matplotlib.pyplot as plt
 import matplotlib.patches as mpatches
 import random
-
+# Fruchterman-Reingold algorithm
 # Read connections from a text file
 connections = []
 with open("social_network100.txt", "r") as file:
