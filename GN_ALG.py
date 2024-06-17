@@ -116,7 +116,7 @@ def draw_communities(G, communities):
             for neighbor in G.neighbors(node):
                 if set([node, neighbor]) not in G.edges():
                     # Draw inter-community edge with a different color or style
-                    nx.draw_networkx_edges(G, pos, edgelist=[(node, neighbor)], style='dashed', edge_size=3)
+                    nx.draw_networkx_edges(G, pos, edgelist=[(node, neighbor)], edge_color='b', style='dashed', edge_size=3)
 
 
     nx.draw(G, pos, node_color=color_map, with_labels=True, node_size=500, font_size=8, font_color='white')
@@ -129,8 +129,7 @@ def draw_communities_with_edges(G, communities):
     plt.figure(figsize=(10, 10))
 
     # Draw intra-community edges
-    nx.draw_networkx_edges(G, pos, edgelist=G.edges(), alpha=0.5)
-
+    nx.draw_networkx_edges(G, pos, edge_color='gray', alpha=0.5)
     # Draw inter-community edges
     for community in communities:
         community_nodes = list(community)
@@ -143,7 +142,7 @@ def draw_communities_with_edges(G, communities):
     # Draw nodes
     nx.draw_networkx_nodes(G, pos, node_size=200, node_color='skyblue', with_labels=True)
 
-    plt.title("Graph with Inter-Community Edges")
+    plt.title("Graph with Inter-Community Edges2")
     plt.show()
 
 def main(argv):
