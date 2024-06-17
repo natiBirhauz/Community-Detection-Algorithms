@@ -4,7 +4,8 @@ import matplotlib.patches as mpatches
 import csv
 import sys
 import random
-DEBUG = True
+
+DEBUG = False
 
 # This method reads the graph structure from the input file
 def buildG(G, file_, delimiter_):
@@ -92,31 +93,36 @@ def runGirvanNewman(G, Orig_deg, m_):
 # Function to draw the graph with communities
 def draw_communities(G, communities):
     pos = nx.spring_layout(G)
-    plt.figure(figsize=(10, 10))
+    #plt.figure(figsize=(10, 10))
 
     color_map = []
     community_colors = {}
     for idx, community in enumerate(communities):
         color = "#{:06x}".format(random.randint(0, 0xFFFFFF))
+
         for node in community:
             community_colors[node] = color
     
     for node in G:
         color_map.append(community_colors.get(node, "#000000"))
+        # Draw intra-community edges
+
+    nx.draw_networkx_edges(G, pos, edgelist=G.edges(), alpha=0.5)
+
+    # Draw inter-community edges
+    for community in communities:
+        community_nodes = list(community)
+        for node in community_nodes:
+            for neighbor in G.neighbors(node):
+                if set([node, neighbor]) not in G.edges():
+                    # Draw inter-community edge with a different color or style
+                    nx.draw_networkx_edges(G, pos, edgelist=[(node, neighbor)], style='dashed', edge_size=3)
+
 
     nx.draw(G, pos, node_color=color_map, with_labels=True, node_size=500, font_size=8, font_color='white')
 
-
     plt.title("Graph after Girvan-Newman Algorithm")
     plt.show()
-
-def main(argv):
-    if len(argv) < 2:
-        sys.stderr.write("Usage: %s <input graph>\n" % (argv[0],))
-        return 1
-    graph_fn = argv[1]
-    G = nx.Graph()  # let's create the graph first
-    buildG(G, graph_fn, ',')
 
 def draw_communities_with_edges(G, communities):
     pos = nx.spring_layout(G)
@@ -140,6 +146,13 @@ def draw_communities_with_edges(G, communities):
     plt.title("Graph with Inter-Community Edges")
     plt.show()
 
+def main(argv):
+    if len(argv) < 2:
+        sys.stderr.write("Usage: %s <input graph>\n" % (argv[0],))
+        return 1
+    graph_fn = argv[1]
+    G = nx.Graph()  # let's create the graph first
+    buildG(G, graph_fn, ',')
 
     if DEBUG:
         print('G nodes: {} & G no of nodes: {}'.format(G.nodes(), G.number_of_nodes()))
@@ -162,10 +175,7 @@ def draw_communities_with_edges(G, communities):
     communities = runGirvanNewman(G, Orig_deg, m_)
 
     # Draw the resulting graph with communities
-    #draw_communities(G, communities)
-
-    # Assuming 'G' is your graph and 'communities' is the list of communities
-    draw_communities_with_edges(G, communities)
+    draw_communities(G, communities)
 
 if __name__ == "__main__":
     sys.exit(main(sys.argv))
