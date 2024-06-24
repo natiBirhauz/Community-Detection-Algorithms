@@ -17,7 +17,7 @@ G = nx.DiGraph()
 for source, destination, weight in connections:
     G.add_edge(source, destination, weight=weight)
 
-# Define communities
+# Define communities by gn alg
 communities = [{8, 18, 13}, {9, 12, 5}, {1, 2, 20, 6}, {3, 4, 7, 10, 11, 14, 15, 16, 17, 19}]
 
 # Create a color map for nodes based on communities

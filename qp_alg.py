@@ -1,13 +1,13 @@
 import networkx as nx
 import matplotlib.pyplot as plt
 import numpy as np
-import random
 import matplotlib.patches as mpatches
 from cdlib import algorithms
+import timeit
 
 # Read connections from a text file
 connections = []
-with open("sorted_network_by_source.txt", "r") as file:
+with open("graph.txt", "r") as file:
     for line in file:
         source, destination, weight = map(int, line.strip().split(","))
         connections.append((source, destination, weight))
@@ -23,10 +23,20 @@ for source, destination, weight in connections:
 G_undirected = G.to_undirected()
 
 # Define the size of the cliques (k) for the Clique Percolation Method
-k = 4  # Using 3-cliques as an example
+k = 5  # Using 3-cliques as an example
+# Define the code to be timed
+def runQP():
+    global communities
+    communities = algorithms.kclique(G_undirected, k)
 
-# Detect communities using Clique Percolation Method
-communities = algorithms.kclique(G_undirected, k)
+# Measure the time using timeit, running the code 100 times
+number_of_runs = 1
+elapsed_time = timeit.timeit(runQP, number=number_of_runs)
+
+# Average the elapsed time over the number of runs
+average_time = elapsed_time / number_of_runs
+
+print(f"The QP algorithm took {average_time:.8f} seconds on average to execute.")
 
 # Print detected communities
 print("Detected communities:")
@@ -75,7 +85,7 @@ edge_labels = {(u, v): f"{d['weight']}" for u, v, d in G.edges(data=True)}
 legend_patches = [mpatches.Patch(color=community_colors[i], label=community_labels[i]) for i in range(len(communities.communities))]
 if missing_nodes:
     legend_patches.append(mpatches.Patch(color=default_color, label=f"Not in any community: {sorted(missing_nodes)}"))
-plt.legend(handles=legend_patches, loc='upper left', fontsize='x-small', title="Communities")
+#plt.legend(handles=legend_patches, loc='upper left', fontsize='x-small', title="Communities")
 
 # Display the plot
 plt.title(f"Clique Percolation Method (k={k})")

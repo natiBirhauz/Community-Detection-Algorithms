@@ -1,13 +1,13 @@
+import timeit
 import networkx as nx
 import matplotlib.pyplot as plt
 import numpy as np
-import random
 from cdlib import algorithms
 import matplotlib.patches as mpatches
 
 # Read connections from a text file
 connections = []
-with open("sorted_network_by_source.txt", "r") as file:
+with open("social_network5000.txt", "r") as file:
     for line in file:
         source, destination, weight = map(int, line.strip().split(","))
         connections.append((source, destination, weight))
@@ -19,8 +19,24 @@ G = nx.Graph()
 for source, destination, weight in connections:
     G.add_edge(source, destination, weight=weight)
 
-# Apply Louvain Algorithm
-communities = algorithms.louvain(G)
+# Apply  Algorithm and messure the time
+
+# Louvain algorithm
+
+# Define the code to be timed
+def runluv():
+    global communities
+    communities = algorithms.louvain(G)
+
+# Measure the time using timeit, running the code 100 times
+number_of_runs = 1000
+elapsed_time = timeit.timeit(runluv, number=number_of_runs)
+
+# Average the elapsed time over the number of runs
+average_time = elapsed_time / number_of_runs
+
+print(f"The luv algorithm took {average_time:.8f} seconds on average to execute.")
+
 
 # Create a color map for nodes based on communities
 color_map = {}

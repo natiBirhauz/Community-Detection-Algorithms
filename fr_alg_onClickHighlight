@@ -18,7 +18,7 @@ G = nx.DiGraph()
 for source, destination, weight in connections:
     G.add_edge(source, destination, weight=weight)
 
-# Define communities
+# Define communities by gn alg
 communities = [{0}, {1, 65, 56, 68, 66, 45, 17, 54, 22, 24, 57, 26, 30, 31},
                {14}, {9, 11, 21, 25, 28, 29, 32, 37, 41, 43, 44, 51, 53, 55, 58, 59, 61, 63, 70, 72},
                {48, 50}, {52}, {2}, {3}, {34, 4, 5}, {19, 7}, {16}, {18}, {20}, {27}, {35}, {39}, {42}, 
