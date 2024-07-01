@@ -7,7 +7,7 @@ import matplotlib.patches as mpatches
 
 # Read connections from a text file
 connections = []
-with open("social_network5000.txt", "r") as file:
+with open("graph.txt", "r") as file:
     for line in file:
         source, destination, weight = map(int, line.strip().split(","))
         connections.append((source, destination, weight))
@@ -29,7 +29,7 @@ def runluv():
     communities = algorithms.louvain(G)
 
 # Measure the time using timeit, running the code 100 times
-number_of_runs = 1000
+number_of_runs = 1
 elapsed_time = timeit.timeit(runluv, number=number_of_runs)
 
 # Average the elapsed time over the number of runs

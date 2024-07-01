@@ -7,7 +7,7 @@ import timeit
 
 # Read connections from a text file
 connections = []
-with open("graph.txt", "r") as file:
+with open("social_network100.txt", "r") as file:
     for line in file:
         source, destination, weight = map(int, line.strip().split(","))
         connections.append((source, destination, weight))
@@ -85,7 +85,7 @@ edge_labels = {(u, v): f"{d['weight']}" for u, v, d in G.edges(data=True)}
 legend_patches = [mpatches.Patch(color=community_colors[i], label=community_labels[i]) for i in range(len(communities.communities))]
 if missing_nodes:
     legend_patches.append(mpatches.Patch(color=default_color, label=f"Not in any community: {sorted(missing_nodes)}"))
-#plt.legend(handles=legend_patches, loc='upper left', fontsize='x-small', title="Communities")
+plt.legend(handles=legend_patches, loc='upper left', fontsize='x-small', title="Communities")
 
 # Display the plot
 plt.title(f"Clique Percolation Method (k={k})")
