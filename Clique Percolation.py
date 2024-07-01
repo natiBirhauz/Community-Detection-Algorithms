@@ -1,3 +1,4 @@
+import os
 import networkx as nx
 import matplotlib.pyplot as plt
 import numpy as np
@@ -7,7 +8,9 @@ import timeit
 
 # Read connections from a text file
 connections = []
-with open("social_network100.txt", "r") as file:
+data_folder = "network data"
+file_path = os.path.join(data_folder, "social_network100.txt")
+with open(file_path, "r") as file:
     for line in file:
         source, destination, weight = map(int, line.strip().split(","))
         connections.append((source, destination, weight))
@@ -23,7 +26,7 @@ for source, destination, weight in connections:
 G_undirected = G.to_undirected()
 
 # Define the size of the cliques (k) for the Clique Percolation Method
-k = 5  # Using 3-cliques as an example
+k = 4  # Using 3-cliques as an example
 # Define the code to be timed
 def runQP():
     global communities

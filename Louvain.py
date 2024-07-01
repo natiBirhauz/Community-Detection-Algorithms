@@ -4,10 +4,13 @@ import matplotlib.pyplot as plt
 import numpy as np
 from cdlib import algorithms
 import matplotlib.patches as mpatches
+import os
 
 # Read connections from a text file
 connections = []
-with open("graph.txt", "r") as file:
+data_folder = "network data"
+file_path = os.path.join(data_folder, "graph.txt")
+with open(file_path, "r") as file:
     for line in file:
         source, destination, weight = map(int, line.strip().split(","))
         connections.append((source, destination, weight))

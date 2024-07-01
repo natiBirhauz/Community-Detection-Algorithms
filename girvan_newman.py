@@ -1,3 +1,4 @@
+import os
 import networkx as nx
 import matplotlib.pyplot as plt
 from networkx.algorithms.community import girvan_newman
@@ -9,7 +10,9 @@ import timeit
 # Step 1: Read the graph from the input file with comma-separated values
 def read_graph(filename):
     G = nx.Graph()
-    with open(filename, 'r') as file:
+    data_folder = "network data"
+    file_path = os.path.join(data_folder, "graph.txt")
+    with open(file_path, "r") as file:
         for line in file:
             parts = line.strip().split(',')
             if len(parts) == 3:
