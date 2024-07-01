@@ -9,7 +9,7 @@ import timeit
 # Read connections from a text file
 connections = []
 data_folder = "network data"
-file_path = os.path.join(data_folder, "sorted_network_by_source2.txt")
+file_path = os.path.join(data_folder, "randomNetwork_20N75E.txt")
 with open(file_path, "r") as file:
     for line in file:
         source, destination, weight = map(int, line.strip().split(","))
@@ -32,7 +32,7 @@ def runQP():
     global communities
     communities = algorithms.kclique(G_undirected, k)
 
-# Measure the time using timeit, running the code 100 times
+# Measure the time using timeit, running the code X times
 number_of_runs = 1
 elapsed_time = timeit.timeit(runQP, number=number_of_runs)
 

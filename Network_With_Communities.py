@@ -21,7 +21,7 @@ def sample_ppm(memb, p, q):
     return G
 
 # Example usage:
-memb = [i % 4 for i in range(50)]  # 50 vertices, 4 communities
+memb = [i % 7 for i in range(200)]  # 50 vertices, 4 communities
 p = 1/3  # Probability of edge within the same community
 q = 0.01  # Probability of edge between different communities
 G = sample_ppm(memb, p, q)

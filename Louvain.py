@@ -9,7 +9,7 @@ import os
 # Read connections from a text file
 connections = []
 data_folder = "network data"
-file_path = os.path.join(data_folder, "sorted_network_by_source2.txt")
+file_path = os.path.join(data_folder, "randomNetwork_20N75E.txt")
 with open(file_path, "r") as file:
     for line in file:
         source, destination, weight = map(int, line.strip().split(","))
@@ -21,10 +21,6 @@ G = nx.Graph()
 # Add edges with weights
 for source, destination, weight in connections:
     G.add_edge(source, destination, weight=weight)
-
-# Apply  Algorithm and messure the time
-
-# Louvain algorithm
 
 # Define the code to be timed
 def runluv():

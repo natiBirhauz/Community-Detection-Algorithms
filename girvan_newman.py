@@ -21,7 +21,7 @@ def read_graph(filename):
     return G
 
 # Step 2: Create the graph using NetworkX
-filename = "social_network5000.txt"
+filename = "CommunityNetwork_200N1788E.txt"
 G = read_graph(filename)
 
 # Print graph information for debugging
@@ -72,7 +72,7 @@ if len(G.edges()) > 0:
         for i, color in color_map.items():
             legend_handles.append(plt.Rectangle((0, 0), 1, 1, fc=color))  # Create a rectangle patch
         plt.legend(handles=legend_handles, labels=[f'Community {i+1}' for i in color_map.keys()], loc='upper left', fontsize='x-small', title="Detected communities")
-
+        plt.title(" Girvan-Newman algorithm")
         plt.show()
 
         # Print community information
