@@ -9,7 +9,7 @@ import os
 # Read connections from a text file
 connections = []
 data_folder = "network data"
-file_path = os.path.join(data_folder, "social_network100.txt")
+file_path = os.path.join(data_folder, "sorted_network_by_source2.txt")
 with open(file_path, "r") as file:
     for line in file:
         source, destination, weight = map(int, line.strip().split(","))

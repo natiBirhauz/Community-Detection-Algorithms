@@ -1,17 +1,26 @@
+# Update the function to read the file from the specified folder
+import os
+
+# Adjust the file path to include the folder "network data"
+data_folder = "network data"
+file_path = os.path.join(data_folder, "social_network5000.txt")
+    
 def sort_and_deduplicate_network_file(input_file, output_file):
     def remove_double_connections(edges):
         seen = set()
         unique_edges = []
         
         for source, dest, weight in edges:
-            if (source, dest) not in seen:
+            if (source, dest) not in seen and (dest, source) not in seen:  # Check both directions
                 seen.add((source, dest))
+                seen.add((dest, source))  # Mark both directions as seen
                 unique_edges.append((source, dest, weight))
         
         return unique_edges
     
+
     # Read the file
-    with open(input_file, 'r') as file:
+    with open(file_path, 'r') as file:
         lines = file.readlines()
     
     # Parse the lines into tuples of (source, dest, weight)
@@ -31,5 +40,5 @@ def sort_and_deduplicate_network_file(input_file, output_file):
         for edge in sorted_edges:
             file.write(f"{edge[0]},{edge[1]},{edge[2]}\n")
 
-# Usage
-sort_and_deduplicate_network_file('sorted_network100.txt', 'sorted_network_by_source.txt')
+# Usage with the specified input and output files
+sort_and_deduplicate_network_file(file_path, 'randomNetwork2_20N75E.txt')

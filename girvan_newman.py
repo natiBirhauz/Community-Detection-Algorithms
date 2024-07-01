@@ -21,7 +21,7 @@ def read_graph(filename):
     return G
 
 # Step 2: Create the graph using NetworkX
-filename = 'graph.txt'  # Replace with your actual filename
+filename = "social_network5000.txt"
 G = read_graph(filename)
 
 # Print graph information for debugging
@@ -39,7 +39,7 @@ def run_girvan_newman(G):
     return sorted(map(sorted, next_level_communities))
 
 # Measure the average time taken to run the Girvan-Newman algorithm
-number_of_runs = 10 
+number_of_runs = 1 
 avg_time = timeit.timeit(lambda: run_girvan_newman(G), number=number_of_runs) / number_of_runs
 print(f'Average time over {number_of_runs} runs: {avg_time:.8f} seconds')
 
