@@ -11,7 +11,7 @@ import timeit
 def read_graph(filename):
     G = nx.Graph()
     data_folder = "network data"
-    file_path = os.path.join(data_folder, "graph.txt")
+    file_path = os.path.join(data_folder, filename)
     with open(file_path, "r") as file:
         for line in file:
             parts = line.strip().split(',')
@@ -21,12 +21,13 @@ def read_graph(filename):
     return G
 
 # Step 2: Create the graph using NetworkX
-filename = 'social_network100.txt'  # Replace with your actual filename
+filename = 'graph.txt'  # Replace with your actual filename
 G = read_graph(filename)
 
 # Print graph information for debugging
-print(f'Number of nodes: {G.number_of_nodes()}' )
+print(f'Number of nodes: {G.number_of_nodes()}')
 print(f'Number of edges: {G.number_of_edges()}')
+
 # Step 3: Run the Girvan-Newman algorithm
 def run_girvan_newman(G):
     communities_generator = girvan_newman(G)
@@ -61,11 +62,17 @@ if len(G.edges()) > 0:
         for i, community in enumerate(communities):
             color = next(colors)
             color_map[i] = color
-            nx.draw_networkx_nodes(G, pos, nodelist=community, node_color=color, label=f'Community {i+1}')
+            nx.draw_networkx_nodes(G, pos, nodelist=community, node_color=color, node_size=200, label=f'Community {i+1}')
         
         nx.draw_networkx_edges(G, pos, edge_color='gray', alpha=0.3)
         nx.draw_networkx_labels(G, pos)
-        plt.legend()
+
+        # Custom legend with rectangles
+        legend_handles = []
+        for i, color in color_map.items():
+            legend_handles.append(plt.Rectangle((0, 0), 1, 1, fc=color))  # Create a rectangle patch
+        plt.legend(handles=legend_handles, labels=[f'Community {i+1}' for i in color_map.keys()], loc='upper left', fontsize='x-small', title="Detected communities")
+
         plt.show()
 
         # Print community information

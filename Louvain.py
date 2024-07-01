@@ -9,7 +9,7 @@ import os
 # Read connections from a text file
 connections = []
 data_folder = "network data"
-file_path = os.path.join(data_folder, "graph.txt")
+file_path = os.path.join(data_folder, "social_network100.txt")
 with open(file_path, "r") as file:
     for line in file:
         source, destination, weight = map(int, line.strip().split(","))
@@ -56,9 +56,8 @@ for idx, community in enumerate(communities.communities):
 # Draw the graph with node colors based on communities
 pos = nx.spring_layout(G)  # Layout for the graph
 plt.figure(figsize=(10, 7))
-
-# Draw nodes with colors based on their community
-nx.draw_networkx_nodes(G, pos, node_color=[color_map.get(node, "blue") for node in G.nodes()], node_size=300)
+   
+nx.draw_networkx_nodes(G, pos, node_color=[color_map.get(node) for node in G.nodes()], node_size=300)
 
 # Draw edges with weights
 nx.draw_networkx_edges(G, pos, edge_color='gray', alpha=0.5)
