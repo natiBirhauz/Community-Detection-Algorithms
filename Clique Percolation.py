@@ -9,7 +9,7 @@ import timeit
 # Read connections from a text file
 connections = []
 data_folder = "network data"
-file_path = os.path.join(data_folder, "CommunityNetwork_50N109E.txt")
+file_path = os.path.join(data_folder, "CommunityNetwork_200N1787E.txt")
 with open(file_path, "r") as file:
     for line in file:
         source, destination, weight = map(int, line.strip().split(","))

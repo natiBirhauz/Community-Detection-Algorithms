@@ -66,7 +66,7 @@ else:
         G.remove_nodes_from(nodes_to_remove)
 
         # Choose the attribute you want to visualize
-        attribute = 'gender'
+        attribute = 'student_faculty_status'
 
         # Extract all unique attributes present in the graph
         attributes = set(nx.get_node_attributes(G, attribute).values())

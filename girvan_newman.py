@@ -21,7 +21,7 @@ def read_graph(filename):
     return G
 
 # Step 2: Create the graph using NetworkX
-filename = "randomNetwork_200N4430E.txt"
+filename = "CommunityNetwork_200N1787E.txt"
 G = read_graph(filename)
 
 # Print graph information for debugging
@@ -39,7 +39,7 @@ def run_girvan_newman(G):
     return sorted(map(sorted, next_level_communities))
 
 # Measure the average time taken to run the Girvan-Newman algorithm
-number_of_runs = 1000
+number_of_runs = 20
 avg_time = timeit.timeit(lambda: run_girvan_newman(G), number=number_of_runs) / number_of_runs
 print(f'Average time over {number_of_runs} runs: {avg_time:.8f} seconds')
 
@@ -72,7 +72,7 @@ if len(G.edges()) > 0:
         for i, color in color_map.items():
             legend_handles.append(plt.Rectangle((0, 0), 1, 1, fc=color))  # Create a rectangle patch
         plt.legend(handles=legend_handles, labels=[f'Community {i+1}' for i in color_map.keys()], loc='upper left', fontsize='x-small', title="Detected communities")
-        plt.title(" Girvan-Newman algorithm")
+        plt.title(f" Girvan-Newman algorithm-{filename}")
         plt.show()
 
         # Print community information
