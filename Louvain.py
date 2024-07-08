@@ -9,7 +9,7 @@ import os
 # Read connections from a text file
 connections = []
 data_folder = "network data"
-file_path = os.path.join(data_folder, "randomNetwork_20N75E.txt")
+file_path = os.path.join(data_folder, "CommunityNetwork_200N1787E.txt")
 with open(file_path, "r") as file:
     for line in file:
         source, destination, weight = map(int, line.strip().split(","))
@@ -28,7 +28,7 @@ def runluv():
     communities = algorithms.louvain(G)
 
 # Measure the time using timeit, running the code 100 times
-number_of_runs = 1
+number_of_runs = 1000
 elapsed_time = timeit.timeit(runluv, number=number_of_runs)
 
 # Average the elapsed time over the number of runs

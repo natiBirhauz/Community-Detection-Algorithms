@@ -9,7 +9,7 @@ import timeit
 # Read connections from a text file
 connections = []
 data_folder = "network data"
-file_path = os.path.join(data_folder, "randomNetwork_20N75E.txt")
+file_path = os.path.join(data_folder, "CommunityNetwork_50N109E.txt")
 with open(file_path, "r") as file:
     for line in file:
         source, destination, weight = map(int, line.strip().split(","))
@@ -26,14 +26,14 @@ for source, destination, weight in connections:
 G_undirected = G.to_undirected()
 
 # Define the size of the cliques (k) for the Clique Percolation Method
-k = 4  # Using 3-cliques as an example
+k = 5  # Using 3-cliques as an example
 # Define the code to be timed
 def runQP():
     global communities
     communities = algorithms.kclique(G_undirected, k)
 
 # Measure the time using timeit, running the code X times
-number_of_runs = 1
+number_of_runs = 1000
 elapsed_time = timeit.timeit(runQP, number=number_of_runs)
 
 # Average the elapsed time over the number of runs
