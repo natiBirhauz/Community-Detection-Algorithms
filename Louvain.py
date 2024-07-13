@@ -4,12 +4,13 @@ import matplotlib.pyplot as plt
 import numpy as np
 from cdlib import algorithms
 import matplotlib.patches as mpatches
+from networkx.algorithms.community.quality import modularity
 import os
 
 # Read connections from a text file
 connections = []
 data_folder = "network data"
-file_path = os.path.join(data_folder, "CommunityNetwork_200N1787E.txt")
+file_path = os.path.join(data_folder, "randomNetwork_20N75E.txt")
 with open(file_path, "r") as file:
     for line in file:
         source, destination, weight = map(int, line.strip().split(","))
@@ -28,7 +29,7 @@ def runluv():
     communities = algorithms.louvain(G)
 
 # Measure the time using timeit, running the code 100 times
-number_of_runs = 1000
+number_of_runs = 1
 elapsed_time = timeit.timeit(runluv, number=number_of_runs)
 
 # Average the elapsed time over the number of runs
@@ -36,6 +37,11 @@ average_time = elapsed_time / number_of_runs
 
 print(f"The luv algorithm took {average_time:.8f} seconds on average to execute.")
 
+# Step 4: Compute the modularity and number of communities
+modularity_value = modularity(G, communities.communities)
+number_of_communities = len(communities.communities)
+print(f'Modularity: {modularity_value}')
+print(f'Number of communities: {number_of_communities}')
 
 # Create a color map for nodes based on communities
 color_map = {}

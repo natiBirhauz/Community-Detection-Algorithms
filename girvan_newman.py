@@ -21,7 +21,7 @@ def read_graph(filename):
     return G
 
 # Step 2: Create the graph using NetworkX
-filename = "CommunityNetwork_200N1787E.txt"
+filename = "CommunityNetwork_50N109E.txt"
 G = read_graph(filename)
 
 # Print graph information for debugging

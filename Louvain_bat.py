@@ -2,11 +2,11 @@ import os
 import networkx as nx
 import matplotlib.pyplot as plt
 from scipy.io import loadmat
-from networkx.algorithms.community import girvan_newman
 from networkx.algorithms.community.quality import modularity
 from matplotlib.colors import get_named_colors_mapping
 import itertools
 import timeit
+from cdlib import algorithms
 
 # Step 1: Read the graph from the .mat file and filter nodes
 def read_and_filter_graph(filename, max_nodes, folder_path='facebook100'):
@@ -38,34 +38,28 @@ def read_and_filter_graph(filename, max_nodes, folder_path='facebook100'):
 
 # Step 2: Create the graph using NetworkX
 filename = 'NYU9.mat'
-G = read_and_filter_graph(filename, max_nodes=1000)
+G = read_and_filter_graph(filename, max_nodes=2200)
 
 # Print graph information for debugging
 print(f'Number of nodes after filtering: {G.number_of_nodes()}')
 print(f'Number of edges after filtering: {G.number_of_edges()}')
 
-# Step 3: Run the Girvan-Newman algorithm
-def run_girvan_newman(G):
-    communities_generator = girvan_newman(G)
-    top_level_communities = next(communities_generator)
-    try:
-        next_level_communities = next(communities_generator)
-    except StopIteration:
-        next_level_communities = top_level_communities
-    return sorted(map(sorted, next_level_communities))
+# Step 3: Run the Louvain algorithm
+def run_louvain(G):
+    return algorithms.louvain(G)
 
-# Measure the average time taken to run the Girvan-Newman algorithm
-number_of_runs = 1 
-avg_time = timeit.timeit(lambda: run_girvan_newman(G), number=number_of_runs) / number_of_runs
+# Measure the average time taken to run the Louvain algorithm
+number_of_runs = 1
+avg_time = timeit.timeit(lambda: run_louvain(G), number=number_of_runs) / number_of_runs
 print(f'Average time over {number_of_runs} runs: {avg_time:.8f} seconds')
 
 # Step 4: Perform community detection and compute modularity
 if len(G.edges()) > 0:
-    communities = run_girvan_newman(G)
+    communities = run_louvain(G)
 
     # Compute modularity
-    mod = modularity(G, communities)
-    num_communities = len(communities)
+    mod = modularity(G, communities.communities)
+    num_communities = len(communities.communities)
     print(f'Modularity: {mod}')
     print(f'Number of communities: {num_communities}')
 
@@ -76,7 +70,7 @@ if len(G.edges()) > 0:
         colors = itertools.cycle(get_named_colors_mapping().values())
         color_map = {}
 
-        for i, community in enumerate(communities):
+        for i, community in enumerate(communities.communities):
             color = next(colors)
             color_map[i] = color
             nx.draw_networkx_nodes(G, pos, nodelist=community, node_color=color, node_size=200, label=f'Community {i+1}')
@@ -89,11 +83,11 @@ if len(G.edges()) > 0:
         for i, color in color_map.items():
             legend_handles.append(plt.Rectangle((0, 0), 1, 1, fc=color))  # Create a rectangle patch
         plt.legend(handles=legend_handles, labels=[f'Community {i+1}' for i in color_map.keys()], loc='upper left', fontsize='x-small', title="Detected communities")
-        plt.title("Girvan-Newman Algorithm")
+        plt.title("Louvain Algorithm")
         plt.show()
 
         # Print community information
-        for i, community in enumerate(communities):
+        for i, community in enumerate(communities.communities):
             print(f'Community {i+1}: {community}')
 
     draw_communities(G, communities)
