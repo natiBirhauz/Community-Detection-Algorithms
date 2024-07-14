@@ -21,10 +21,13 @@ def sample_ppm(memb, p, q):
     return G
 
 # Example usage:
-memb = [i % 7 for i in range(200)]  # 50 vertices, 4 communities
-p = 1/3  # Probability of edge within the same community
-q = 0.01  # Probability of edge between different communities
+memb = [i % 3 for i in range(20)]  #  vertices,  communities
+p = 0.9  # Probability of edge within the same community
+q = 0.5  # Probability of edge between different communities
 G = sample_ppm(memb, p, q)
+
+# Print the number of edges
+print(f'Number of edges in the graph: {G.number_of_edges()}')
 
 # Create a colormap for communities
 cmap = plt.get_cmap("tab10", max(memb) + 1)
