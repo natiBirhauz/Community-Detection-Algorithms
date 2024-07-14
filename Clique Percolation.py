@@ -27,11 +27,11 @@ def read_graph_from_file(file_path):
     return G
 
 data_folder = "network data"
-file_path = os.path.join(data_folder, "randomNetwork_20N75E.txt")
+file_path = os.path.join(data_folder, "CommunityNetwork_200N4566E3C.txt")
 
 # Step 2: Create the graph using NetworkX
 G = read_graph_from_file(file_path)
-k = 4
+k = 3
 
 # Print graph information for debugging
 print(f'Number of nodes after filtering: {G.number_of_nodes()}')
