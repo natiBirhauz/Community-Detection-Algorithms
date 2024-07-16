@@ -1,3 +1,4 @@
+
 import itertools
 import timeit
 import networkx as nx
@@ -278,3 +279,5 @@ data_folder = "network data"
 num_runs = 20  # You can change this to the desired number of runs
 ground_truth = None  # Replace with actual ground truth data if available
 process_all_files(data_folder, num_runs, ground_truth)
+print("finished!'")
+

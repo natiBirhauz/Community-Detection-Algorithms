@@ -1,3 +1,4 @@
+# Remove double connections and sort a network file
 # Update the function to read the file from the specified folder
 import os
 

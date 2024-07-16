@@ -1,7 +1,7 @@
+# load the file "testing.xlsx" and make graphs out of it
 import os
 import pandas as pd
 import matplotlib.pyplot as plt
-
 # Load the Excel file
 data_folder = "network data"
 file_path = os.path.join(data_folder, "testing.xlsx")
@@ -9,8 +9,6 @@ df = pd.read_excel(file_path)
 
 # Set the first column as the index (network types)
 df.set_index(df.columns[0], inplace=True)
-# Exclude the "JN" column (Girvan-Newman algorithm)
-df = df.drop(columns=['JN'])
 # Plotting the data - Line Plot
 plt.figure(figsize=(14, 8))
 for column in df.columns:
