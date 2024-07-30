@@ -31,6 +31,6 @@ social_network_df = generate_social_network_data(num_rows)
 print(social_network_df.head())
 
 # Save the dataframe to a CSV file
-social_network_df.to_csv('saturated connections.csv', index=False)
+social_network_df.to_csv('saturated connectio12ns.csv', index=False)
 
 

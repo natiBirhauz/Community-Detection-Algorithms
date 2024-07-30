@@ -21,9 +21,9 @@ def sample_ppm(memb, p, q):
     return G
 
 # Example usage:
-memb = [i % 3 for i in range(20)]  #  vertices,  communities
-p = 0.9  # Probability of edge within the same community
-q = 0.5  # Probability of edge between different communities
+memb = [i % 4 for i in range(50)]  #  vertices,  communities
+p = 0.5  # Probability of edge within the same community
+q = 0.01  # Probability of edge between different communities
 G = sample_ppm(memb, p, q)
 
 # Print the number of edges
@@ -54,7 +54,7 @@ plt.show()
 
 # Export graph edges and community information to CSV
 edges = G.edges()
-with open('graph_edges_with_community.csv', 'w', newline='') as csvfile:
+with open('graph_edges_with_commusssnity.csv', 'w', newline='') as csvfile:
     writer = csv.writer(csvfile)
     writer.writerow(['node1', 'node2', 'community_of_node1'])  # Write header
     for edge in edges:
