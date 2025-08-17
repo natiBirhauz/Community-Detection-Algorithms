@@ -28,7 +28,6 @@ The project beginning with a review of existing literature on community detectio
 # Technologies
 
 Programming Languages: Python
-Libraries/Frameworks: ???
 Tools: GitHub ,Visual Studio code.
 
 # Acknowledgements
